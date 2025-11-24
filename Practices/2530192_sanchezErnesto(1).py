@@ -175,7 +175,7 @@ price_text = input("insert prices: ").strip()
 discount_text = input("insert discount rate (0 to 1): ").strip()
 
 if not price_text or  not discount_text:
-    print("Error: Invalid input, cannot be null, stupid nigga")
+    print("Error: Invalid input, cannot be null")
 else: 
     try:
         discount_rate =float(discount_text) 
