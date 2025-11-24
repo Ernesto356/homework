@@ -63,3 +63,9 @@ except:
  3) Course notes on sequence generation and iteration
 
 """
+
+"""
+repositorios de git:
+https://github.com/Ernesto356/homework.git
+
+"""

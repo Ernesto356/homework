@@ -25,15 +25,15 @@ Principios y buenas prácticas (lista corta):
 """
 
 """
-# Problem 1: Rectangle area and perimeter (basic functions)
-# Description: Calculate area and perimeter of a rectangle using two functions.
-# Inputs: width (float), height (float)
-# Outputs: prints "Area:" and "Perimeter:" with numeric values
-# Validations: width > 0 and height > 0
-# Test cases:
-# 1) Normal: width=5, height=3 -> Area:15, Perimeter:16
-# 2) Border: width=0.1, height=0.1 -> small valid values
-# 3) Error: width=-2, height=3 -> Error: invalid input
+ Problem 1: Rectangle area and perimeter (basic functions)
+ Description: Calculate area and perimeter of a rectangle using two functions.
+ Inputs: width (float), height (float)
+ Outputs: prints "Area:" and "Perimeter:" with numeric values
+ Validations: width > 0 and height > 0
+ Test cases:
+ 1) Normal: width=5, height=3 -> Area:15, Perimeter:16
+ 2) Border: width=0.1, height=0.1 -> small valid values
+ 3) Error: width=-2, height=3 -> Error: invalid input
 """
 
 def calculate_area (widht, height):
