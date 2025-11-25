@@ -269,7 +269,7 @@ except:
 
 """
 """
- REFERENCES (minimum 5) - comments
+ REFERENCES 
  1) Python documentation - Built-in Types: Text Sequence Type — str
     https://docs.python.org/3/library/stdtypes.htmltext-sequence-type-str
  2) Python official tutorial - Strings
