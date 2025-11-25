@@ -1,309 +1,261 @@
 """
-Portada: 
-Nombre: Sanchez Luevano Jesus Ernesto
-matricula: 2530192
-Grupo: 1-1 IM
+ Portada:
+ Name: Jesus Ernesto Sanchez Luevano
+ Matricula: 2530192
+ Grupo: IM 1-1
+
+
+ """
 
 """
-"""
-Este archivo contiene ejercicios prácticos centrados en el uso de funciones en Python.
-Una función es un bloque de código reutilizable definido con def que puede aceptar parámetros y valores de retorno. 
-Los parámetros son los nombres utilizados en las definiciones de funciones; los argumentos son los valores reales
-que se pasan al llamar a la función. Separar la lógica en funciones mejora la modularidad, la capacidad de prueba y la reutilización.
-Devolver valores es preferible a solo imprimir, ya que permite un mayor procesamiento y facilita las pruebas unitarias.
-Este documento implementa seis problemas, cada uno con una descripción, entradas, salidas, validaciones, casos de prueba y una funció
-correspondiente que implementa el comportamiento requerido.
-"""
-
-"""
-Principios y buenas prácticas (lista corta):
-- Preferir funciones pequeñas con una sola responsabilidad.
-- Evitar código duplicado; extraer la lógica repetida a las funciones auxiliares.
-- Utilizar funciones puras siempre que sea posible: misma entrada -> misma salida, sin efectos secundarios.
-- Documentar brevemente la función y los parámetros que espera.
-- Usar nombres de función claros: calcular_área, resumir_números, aplicar_descuento.
+ RESUMEN EJECUTIVO (6-10 líneas)
+Una cadena en Python es una secuencia de texto (tipo 'str') y es inmutable: 
+las operaciones que modifican una cadena producen una nueva cadena. Las operaciones básicas 
+incluyen concatenación, medición de longitud, segmentación, búsqueda, reemplazo y división.
+Validar y normalizar la entrada (eliminar, mayúsculas/minúsculas) es esencial para evitar 
+comparaciones incorrectas y datos malformados (por ejemplo, correos electrónicos y contraseñas). 
+Este archivo contiene seis problemas que muestran la creación, normalización, validación y operaciones
+comunes con cadenas, junto con casos de prueba y documentación.
 """
 
+
 """
- Problem 1: Rectangle area and perimeter (basic functions)
- Description: Calculate area and perimeter of a rectangle using two functions.
- Inputs: width (float), height (float)
- Outputs: prints "Area:" and "Perimeter:" with numeric values
- Validations: width > 0 and height > 0
+ PRINCIPIOS Y MEJORES PRÁCTICAS
+- Las cadenas son inmutables: las operaciones crean nuevas cadenas.
+- Normalice la entrada usando strip() y lower() antes de comparar.
+- Evite los números mágicos para los índices; documente las porciones.
+- Prefiera los métodos de cadena integrados a las implementaciones manuales.
+- Validación: primero compruebe si hay vacíos (después de strip()), luego aplique las reglas de formato.
+- Use nombres de variable claros (lower_snake_case) y mensajes de salida en inglés.
+
+ """
+
+ 
+""" 
+ Problem 1: Full name formatter
+ Description:
+ Given a full name string, normalize and return Title Case and initials.
+ Inputs:
+   - full_name (string)
+ Outputs:
+   - Formatted name: "<Name In Title Case>"
+   - Initials: "X.X.X."
+ Validations:
+   - Not empty after strip()
+   - At least two words
  Test cases:
- 1) Normal: width=5, height=3 -> Area:15, Perimeter:16
- 2) Border: width=0.1, height=0.1 -> small valid values
- 3) Error: width=-2, height=3 -> Error: invalid input
-"""
+   1) Normal: "juan carlos tovar"
+   2) Border: " ana  lopez " (two words with extra spaces)
+   3) Error: "   " (only spaces)
+ """
 
-def calculate_area (widht, height):
-    return widht * height
+full_name = input("insert your full name: ").strip()
 
-def calculate_perimeter(widht, heihgt):
-    return 2 * (widht+height)
+name = full_name.split()
 
 
-widht = 0 
-height = 0
+if not full_name or len(name) < 2:
+    print("Error, your name cannot be null or only one")
 
-try: 
-    widht = float(input("insert the weight: "))
-    height = float(input("insert the height: "))
-
-except:
-    widht = 0
-    height = 0 
-
-if widht <= 0 or height <= 0 : 
-    print("Error the widht or the height cant be less than or equal to 0")
-else: 
-    area = calculate_area(widht, height)
-    perimeter = calculate_perimeter(widht, height)
-    print(f"area : {area}")
-    print(f"perimeter : {perimeter}")
-
-
-print("\n -------------------------------")
-
-"""
-Problem 2: Grade classifier (function with return string)
-Description: Classify a numeric score into letter grade A-F.
-Inputs: score (float or int)
-Outputs: prints "Score:" and "Category:"
-Validations: 0 <= score <= 100
-Test cases:
-1) Normal: score=92 -> Category: A
-2) Border: score=90 -> Category: A; score=89.9 -> B
-3) Error: score=150 -> Error: invalid input
-"""
-def classify_score(score):
-    if score >= 90:
-        return "A"
-    elif score >= 80:
-        return "B"
-    elif score >= 70:
-        return "C"
-    elif score >= 60:
-        return "D"
-    else : 
-        return "F"
-
-try: 
-    score =float(input("insert your score: "))
-except:
-    score = -1
-
-if score < 0 or score > 100:
-    print("Error Invalid input")
-
-else: 
-    category = classify_score (score)
-    print(f" Score {score} \
-            Category : {category}")
-
-
-print ("\n-----------------------")
-"""
-Problem 3: List statistics function (min, max, average)
- Description: Summarize a list of numbers returning a dict with min, max, average.
- Inputs: numbers_list (list of numbers)
- Outputs: prints "Min:", "Max:", "Average:"
- Validations: list not empty; all elements convertible to numbers
- Test cases:
- 1) Normal: "10,20,30" -> Min:10, Max:30, Average:20
- 2) Border: "5" -> Min:5, Max:5, Average:5
- 3) Error: "10,abc,30" -> Error: invalid input
-"""
-
-def summarize_numbers(numbers_list):
-    summary = {
-        "min": min(numbers_list),
-        "max": max(numbers_list),
-        "average": sum(numbers_list) / len(numbers_list)
-    }
-    return summary
-
-numbers_text = input("Insert numbers separated by commas : ").strip()
-
-if not numbers_text:
-    print("error invalid input")
 else:
-    try:
-        parts = numbers_text.split(",")
-        numbers_list = []
+    print (f"your name is: {full_name.title()}")
+    
+    initials = ""
+    for word in name: 
+        initials=initials+word[0].upper()+"."
 
-        for part in parts:
-            part = part.strip()
-            if part == "":
-                print("error, the number cannot be null")
-            else:
-                numbers_list.append(float(part))
+    print(f"initials: {initials}")
 
-        if len(numbers_list) == 0:
-            print("Error, the list cannot be null")
-        else:
-            result = summarize_numbers(numbers_list)
-            print(f"Max : {result['max']}")
-            print(f"min : {result['min']}")
-            print(f"average : {result['average']}")
-    except:
-        print("Error invalid Input")
-
-
-print ("\n --------------------")
+print("\n---------------------------------------")
 
 """
-# Problem 4: Apply discount list (pure function)
- Description: Return a new list with discounted prices, leaving original list unchanged.
- Inputs: prices_list (list of float), discount_rate (float between 0 and 1)
- Outputs: prints "Original prices:" and "Discounted prices:"
- Validations: prices_list not empty, all prices > 0, 0 <= discount_rate <= 1
+ Problem 2: Simple email validator
+ Description:
+ Validate basic email structure: exactly one '@', at least one '.' after '@', and no spaces.
+ Inputs:
+   - email_text (string)
+ Outputs:
+   - "Valid email: true/false" and if true "Domain: <domain_part>"
+ Validations:
+   - Not empty after strip()
+   - Exactly one '@'
+   - No spaces
  Test cases:
- 1) Normal: prices=[100,200], discount_rate=0.1 -> [90,180]
- 2) Border: discount_rate=0 or 1
- 3) Error: negative price or invalid discount_rate
-"""
+   1) Normal: "user@example.com"
+   2) Border: "user@sub.example.co"
+   3) Error: " user@@example .com " or "userexample.com"
+ ---------------------------"""
 
-def apply_disocunt (prices_list, discount_rate):
-    discounted = []
-    for prices in prices_list:
-        discounted_prices= prices - (prices*discount_rate)
-        discounted.append(discounted_prices)
-    return discounted
+email = input("Insert a email : ").strip()
 
-price_text = input("insert prices: ").strip()
-discount_text = input("insert discount rate (0 to 1): ").strip()
-
-if not price_text or  not discount_text:
-    print("Error: Invalid input, cannot be null")
-else: 
-    try:
-        discount_rate =float(discount_text) 
-        if discount_rate >= 0 or discount_rate < 1:
-            parts = price_text.split(",")
-            prices_list = []
-            for part in parts : 
-                part = part.strip()
-                if part == "":
-                    print("Error the number cannot be null")
-                else:
-                    price = float(part)
-                
-                if price < 0: 
-                    print("Error, the price cannot be negative")
-                else:
-                    prices_list.append(price)
-            if len(prices_list) == 0 :
-                print("Error the number list cannot be null")
-            else: 
-                discounted_list = apply_disocunt(prices_list, discount_rate)
-                print(f"Original prices: {prices_list}" )
-                print(f"prices with discount: {discounted_list}")
-        else:
-            print("Error invalid input")
-
-    except Exception as error:
-        print("Error Invalid Input")
-
-print("\n-------------------------------")
-
-"""
- Problem 5: Greeting function with default parameters
- Description: Build greeting using optional title and required name.
- Inputs: name (string), title (string optional)
- Outputs: print "Greeting:"
- Validations: name must not be empty after strip()
- Test cases:
- 1) Normal: name='Alice', title='Dr.' -> "Hello, Dr. Alice!"
- 2) Border: name='Bob', title='' -> "Hello, Bob!"
- 3) Error: name='' -> Error: invalid input
-"""
-
-
-def greet(UserName="", userTitle=""):
-    UserName = UserName.strip()
-    userTitle = user_title.strip()
-
-    if not user_title:
-        return f"{user_name}"
+if not email: 
+    print("Error, the email cannot be null")
+else:
+    if " " in email: 
+        print("error, The email cannot contain blank spaces.")
+    elif email.count("@") != 1:
+        print("Error the gmail need contain only one @")
     else:
-        return f"{userTitle} {user_name}"
-
-
-user_name = input("Insert your name: ").strip()
-user_title = input("insert your title: ").strip()
-
-if not user_name:
-    print("invalid input: User name cannot be null")
-else:
-    try:
-
-        if not user_title:
-            full_name = greet(user_name)
+        at_index = email.find("@")
+        domain = email[at_index +1: ]
+        if "." in domain:
+            print("Valid email")
+            print(f"domain: {domain}")
         else:
-            full_name = greet(user_name, user_title)
-        
-        print(f"Greeting: {full_name}")
-
-    except Exception as error:
-        print(error)
-
-
-print("\n-------------------------")
+            print("the domain need one '.'")
+print("\n---------------------------------------")
 """
-Problem 6: Factorial function (iterative implementation)
- Description: Compute n! using an iterative approach. Iterative chosen to avoid
- deep recursion and stack limits; iterative is simple and efficient for n<=20.
- Inputs: n (int)
- Outputs: prints "n:" and "Factorial:"
- Validations: n integer, 0 <= n <= 20 (to avoid extremely large numbers)
+ Problem 3: Palindrome checker (ignoring spaces and case)
+ Description:
+ Check whether a phrase is a palindrome ignoring spaces and case.
+ Inputs:
+   - phrase (string)
+ Outputs:
+   - "Is palindrome: true/false" and optionally normalized version
+ Validations:
+   - Not empty after strip()
+   - At least 3 characters after removing spaces
  Test cases:
- 1) Normal: n=5 -> 120
- 2) Border: n=0 -> 1
- 3) Error: n=-1 or n=21 -> Error: invalid input
+   1) Normal: "Anita lava la tina"
+   2) Border: "aba"
+   3) Error: "  " or "ab"
+
 """
 
-def factorial_number(n):
-    result=1
-    for i in range(1 , n+1):
-        result = result * i
-    return result
+phrase = input("insert a phrase : ").strip()
+if not phrase:
+    print("the phrase cannot be null")
+else:
+    phrase_normal = phrase.lower().replace(" ", "")
+    if len(phrase_normal)<3:
+        print("Is palindrome: false")
+    else: 
+        reversed_text = phrase_normal[::-1]
+        if reversed_text == phrase_normal:
+            print("the phrase is a palindrome")
+        else:
+            print("the phrase not is a palindrome")
+print("\n---------------------------------------")
 
-number = 0
-try: 
-    number = int(input("Insert a number (1-20): "))
+# ---------------------------
+# Problem 4: Sentence word stats (lengths and first/last word)
+# Description:
+# Given a sentence, normalize spaces and return word count, first, last, shortest, longest words.
+# Inputs:
+#   - sentence (string)
+# Outputs:
+#   - Word count, First word, Last word, Shortest word, Longest word
+# Validations:
+#   - Not empty after strip()
+#   - At least one word after split()
+# Test cases:
+#   1) Normal: "  The quick brown fox  "
+#   2) Border: "Hello"
+#   3) Error: "    "
+# ---------------------------
+
+sentence = input("write a sentence : ").strip()
+if not sentence:
+    print("the sentence cannot be null")
+else:
+    sentence_list = sentence.split()
+    print(f"words: {len(sentence_list)}")
+    print(f"first word: {sentence_list[0]}")
+    print(f"last word: {sentence_list[-1]}")
+
+    shortest_word = sentence_list[0]
+    longest_word = sentence_list[0]
+
+    for word in sentence_list:
+        if len(word) < len(shortest_word):
+            shortest_word = word
+        if len(word) > len(longest_word):
+            longest_word = word
+    print(f"shortest word: {shortest_word}")
+    print(f"longest word : {longest_word}")
+print("\n----------------------------------------")
+"""
+ Problem 5: Password strength classifier
+ Description:
+ Classify password as weak, medium, or strong based on documented rules.
+ Suggested rules (documented in comments):
+   - Weak: length < 8 OR only lower-case letters OR very simple (e.g., "password")
+   - Medium: length >= 8 and (has letters and digits) but missing either symbols or mixed case
+   - Strong: length >= 8 AND has upper, lower, digit, and symbol (non-alnum)
+ Inputs:
+   - password_input (string)
+ Outputs:
+   - "Password strength: weak/medium/strong"
+ Validations:
+   - Not empty
+ Test cases:
+   1) Normal: "Str0ng!Pass"
+   2) Border: "Password1" (no symbol)
+   3) Error: "" (empty)
+ """
+
+password = input("insert your password: ").strip()
+if not password:
+    print("error the password cannot be null")
+else:
+    len_password = len(password)
+    has_upper = False
+    has_lower = False
+    has_digit = False
+    has_symbol = False
+
+    for i in password:
+        if i.isupper():
+            has_upper = True
+        if i.islower():
+            has_lower = True
+        if i.isdigit():
+            has_digit = True
+        if not i.isalnum():
+            has_symbol = True
+    if len_password > 8 and has_upper and has_lower and has_symbol and has_digit:
+        print(f"the password {password} is strong")
+    elif len_password > 8 and (has_upper and has_lower) or (has_lower and has_digit) or (has_upper and has_digit) and not has_symbol:
+        print(f"password {password} is medium")
+    else:
+        print(f"the password {password} is weak")
+    
+print("\n ---------------------------------")
+"""
+ Problem 6: Product label formatter (fixed-width text)
+ Description:
+ Given product_name and price_value produce a single-line label exactly 30 characters long.
+ Format: Product: <NAME> | Price: $<PRICE>
+ If shorter -> pad spaces to the right; If longer -> truncate to 30 chars.
+ Inputs:
+   - product_name (string)
+   - price_value (string or number)
+ Outputs:
+   - "Label: '<30-char-text>'"
+ Validations:
+   - product_name not empty after strip()
+   - price_value convertible to positive number
+ Test cases:
+   1) Normal: ("Notebook", 12.5)
+   2) Border: (long name) -> truncation
+   3) Error: ("   ", "abc")
+ 
+ """
+
+try : 
+    name_product = input("product : ").strip()
+    price_product = float(input("price : "))
+
+    if not name_product:
+        print("Error, name product cannot be null")
+    else:
+        name_product = str(name_product)
+        label = f"Product: {name_product} | Price: ${price_product}"
+        
+        if len(label) > 30:
+            label = label[:30]
+        elif len(label) < 30:
+            label = label + (" " * (30 - len(label)))
+        print(f"label  {label}.")
 except:
-    number = 0
-
-if number < 1 or number > 20:
-    print("Invalid Number: Please insert a number inside the specified range")
-
-else : 
-    factorial = factorial_number(number)
-
-    print (f"Number: {number}")
-    print (f"Factorial : {factorial}" )
-"""
-Conclusions:
- Functions help organize code into reusable, testable units and reduce duplication.
- Returning values instead of printing makes functions composable and easier to test.
- Default parameters and named arguments increase flexibility and readability.
- Encapsulating repeated logic (e.g., parsing and validation) simplifies the main flow.
- Separating main program logic from helper functions clarifies responsibilities and
- makes maintenance and debugging easier.
-
-
- References:
- 1) Python documentation - Defining Functions: https://docs.python.org/3/tutorial/controlflow.html#defining-functions
- 2) Python documentation - Data Structures: https://docs.python.org/3/tutorial/datastructures.html
- 3) "Fluent Python" (L. Ramalho) - chapters on functions and data model
- 4) "Clean Code" concepts applied to Python - articles and tutorials
- 5) Official Python style guide (PEP 8) - https://peps.python.org/pep-0008/
- 6) Various online tutorials on unit testing and pure functions
- --------------------------------------------------
-"""
-
-"""
-Url del repositorio de github:
-https://github.com/Ernesto356/homework.git
-"""
+    print("Error, invalid price ")
