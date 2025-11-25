@@ -137,22 +137,22 @@ else:
             print("the phrase not is a palindrome")
 print("\n---------------------------------------")
 
-# ---------------------------
-# Problem 4: Sentence word stats (lengths and first/last word)
-# Description:
-# Given a sentence, normalize spaces and return word count, first, last, shortest, longest words.
-# Inputs:
-#   - sentence (string)
-# Outputs:
-#   - Word count, First word, Last word, Shortest word, Longest word
-# Validations:
-#   - Not empty after strip()
-#   - At least one word after split()
-# Test cases:
-#   1) Normal: "  The quick brown fox  "
-#   2) Border: "Hello"
-#   3) Error: "    "
-# ---------------------------
+"""
+ Problem 4: Sentence word stats (lengths and first/last word)
+ Description:
+ Given a sentence, normalize spaces and return word count, first, last, shortest, longest words.
+ Inputs:
+   - sentence (string)
+ Outputs:
+   - Word count, First word, Last word, Shortest word, Longest word
+ Validations:
+   - Not empty after strip()
+   - At least one word after split()
+ Test cases:
+   1) Normal: "  The quick brown fox  "
+   2) Border: "Hello"
+   3) Error: "    "
+ """
 
 sentence = input("write a sentence : ").strip()
 if not sentence:
@@ -259,3 +259,30 @@ try :
         print(f"label  {label}.")
 except:
     print("Error, invalid price ")
+"""
+ CONCLUSIONS 
+ - String handling is central to input/output and user data processing in most programs.
+ - Use strip(), lower()/upper() and split()/join() to normalize and manipulate text safely.
+ - Normalize before comparing to avoid false negatives due to case or extra spaces.
+ - Proper validation (emptiness, basic format checks) prevents garbage data and errors.
+ - Remember: strings are immutable; slicing returns new strings and is efficient for read-only operations.
+
+"""
+"""
+ REFERENCES (minimum 5) - comments
+ 1) Python documentation - Built-in Types: Text Sequence Type — str
+    https://docs.python.org/3/library/stdtypes.htmltext-sequence-type-str
+ 2) Python official tutorial - Strings
+    https://docs.python.org/3/tutorial/introduction.htmlstrings
+ 3) Real Python - Strings and Text Handling in Python
+    https://realpython.com/python-strings/
+ 4) W3Schools - Python Strings
+    https://www.w3schools.com/python/python_strings.asp
+ 5) StackOverflow - Various Q&A on string methods and validation patterns
+    https://stackoverflow.com/questions/tagged/python+strings
+ """
+
+"""
+Url del repositorio de github:
+https://github.com/Ernesto356/homework.git
+"""
