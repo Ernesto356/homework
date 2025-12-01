@@ -29,9 +29,9 @@ Description: Program that reads an integer n and prints the first n Fibonacci te
  3) Error: n = 0 -> Error: invalid input
 """
 
-n = int(input("Insert a number: "))
 
 try:
+    n = int(input("Insert a number: "))
 
     if n < 1 or n > 50:
         print("insert a number inside the specified range")
